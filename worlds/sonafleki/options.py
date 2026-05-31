@@ -41,6 +41,12 @@ class IncludeFiveStars(Toggle):
     """
     display_name = "Include Five-Star Stages"
 
+class TrueEnding(Toggle):
+    """
+    Determines whether the true finale must be completed.
+    """
+    display_name = "True Ending"
+
 class StatueSanityLevel(Choice):
     """
     Determines if and how overworld statues are shuffled into the item pool.
@@ -74,6 +80,7 @@ class TeleportSanityLevel(Toggle):
 class FetchSanityLevel(Choice):
     """
     Determines if and how overworld fetch quest items are shuffled into the item pool.
+
     None: Fetch quest items simply exist in the world by default.
     Standard: Fetch quest items are shuffled into the item pool as a singular item.
     Insane: Each individual fetch quest item is shuffled into the item pool.
@@ -101,13 +108,14 @@ class SonaflekiOptions(PerGameCommonOptions):
     gratitudes_required: GratitudesRequiredPercentage
     skip_tutorials: SkipTutorials
     include_five_stars: IncludeFiveStars
+    true_ending : TrueEnding
     # TODO: jump type spawning
     # spawning style (consistent, semirandom, everywhere, hidden)
     # - consistent is outside usual house
     # - semirandom is outside at random house
     # - everywhere spawns on every screen until picked up
     # - hidden spawns in a random point on the map
-    # TODO: token and gratitude distribution
+    # TODO: token distribution
     # number of tokens in each house
     # number of extra tokens rewarded for completing a level
 
@@ -130,5 +138,9 @@ class SonaflekiOptions(PerGameCommonOptions):
     # TODO: traps
     # trap fill percentage
     # design individual traps and give weights
+    # trap link?
 
-#TODO: option groups
+# TODO: option groups
+
+# TODO: option presets
+# - vanilla, standard, odd, chaotic
