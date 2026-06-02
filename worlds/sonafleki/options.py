@@ -191,6 +191,70 @@ class RandomizeMusic(Toggle):
     """
     display_name = "Randomize Music"
 
+class TrapFillPercentage(Range):
+    """
+    Replace a percentage of junk items in the item pool with random traps
+    """
+    display_name = "Trap Fill Percentage"
+    range_start = 0
+    range_end = 100
+    default = 0
+
+class BaseTrapWeight(Choice):
+    """
+    Base Class for Trap Weights
+    """
+    option_none = 0
+    option_low = 1
+    option_medium = 2
+    option_high = 4
+    default = 2
+
+class TrapExpirationTime(Range):
+    """
+    The amount of time (in minutes) that it takes for traps to wear off.
+    """
+    display_name = "Trap Expiration Time"
+    range_start = 1
+    range_end = 10
+    default = 2
+
+class SlowTrapWeight(BaseTrapWeight):
+    """
+    Likelihood of receiving a trap which slows down the game speed.
+    """
+    display_name = "Slow Trap Weight"
+
+class FastTrapWeight(BaseTrapWeight):
+    """
+    Likelihood of receiving a trap which speeds up the game speed.
+    """
+    display_name = "Fast Trap Weight"
+
+class ReverseTrapWeight(BaseTrapWeight):
+    """
+    Likelihood of receiving a trap which reverses the controls.
+    """
+    display_name = "Reverse Trap Weight"
+
+class IceTrapWeight(BaseTrapWeight):
+    """
+    Likelihood of receiving a trap which makes the ground slippery.
+    """
+    display_name = "Ice Trap Weight"
+
+class LiteratureTrapWeight(BaseTrapWeight):
+    """
+    Likelihood of a receiving a trap which causes the player to read literature.
+    """
+    display_name = "Literature Trap Weight"
+
+class BounceTrapWeight(BaseTrapWeight):
+    """
+    Likelihood of a receiving a trap which greatly increases wall bounce.
+    """
+    display_name = "Bounce Trap Weight"
+
 @dataclass
 class SonaflekiOptions(PerGameCommonOptions):
     #game options
@@ -221,10 +285,15 @@ class SonaflekiOptions(PerGameCommonOptions):
     randomize_level_locations: RandomizeLevelLocations
     randomize_music: RandomizeMusic
 
-    # TODO: traps
-    # trap fill percentage
-    # design individual traps and give weights
-    # trap link?
+    #traps
+    trap_fill_percentage: TrapFillPercentage
+    trap_expiration_time: TrapExpirationTime
+    slow_trap_weight: SlowTrapWeight
+    fast_trap_weight: FastTrapWeight
+    reverse_trap_weight: ReverseTrapWeight
+    ice_trap_weight: IceTrapWeight
+    literature_trap_weight: LiteratureTrapWeight
+    bounce_trap_weight: BounceTrapWeight
 
 # TODO: option groups
 
