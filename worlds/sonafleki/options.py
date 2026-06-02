@@ -295,7 +295,42 @@ class SonaflekiOptions(PerGameCommonOptions):
     literature_trap_weight: LiteratureTrapWeight
     bounce_trap_weight: BounceTrapWeight
 
-# TODO: option groups
+option_groups = [
+    OptionGroup("General Options", [
+        TotalGratitudes,
+        GratitudesRequiredPercentage,
+        SkipTutorials,
+        IncludeFiveStars,
+        IncludeTidepool,
+        TrueEnding,
+        JumpTypeSpawning,
+        TokensPerHouse,
+        ExtraTokensPerLevel
+    ]),
+    OptionGroup("Sanity Options", [
+        StatueSanityLevel,
+        TeleportSanityLevel,
+        FetchSanityLevel,
+        CheckpointSanity
+    ]),
+    OptionGroup("Randomization Options", [
+        LevelRandomization,
+        MaxVarietyOnHigh,
+        GratitudeDistribution,
+        RandomizeLevelLocations,
+        RandomizeMusic
+    ]),
+    OptionGroup("Trap Options", [
+        TrapFillPercentage,
+        TrapExpirationTime,
+        SlowTrapWeight,
+        FastTrapWeight,
+        ReverseTrapWeight,
+        IceTrapWeight,
+        LiteratureTrapWeight,
+        BounceTrapWeight
+    ])
+]
 
 # TODO: option presets
 # - vanilla, standard, odd, chaotic
