@@ -27,7 +27,7 @@ class GratitudesRequiredPercentage(Range):
     display_name = "Gratitudes Required Percentage"
     range_start = 0
     range_end = 100
-    default = 50
+    default = 80
 
 class SkipTutorials(Toggle):
     """
@@ -41,11 +41,54 @@ class IncludeFiveStars(Toggle):
     """
     display_name = "Include Five-Star Stages"
 
+class IncludeTidepool(Toggle):
+    """
+    Determines whether the "tidepool" area is included.
+    """
+    display_name = "Include Tidepool"
+
 class TrueEnding(Toggle):
     """
     Determines whether the true finale must be completed.
     """
     display_name = "True Ending"
+
+class JumpTypeSpawning(Choice):
+    """
+    When receiving a jump type, rather than gaining access to it immediately,
+    it will spawn somewhere in the overworld and trigger its respective cutscene
+    and tutorial level when found. This setting determines where and how new
+    jump types are spawned.
+
+    Consistent: Jump types always spawn outside the house where you'd normally get them.
+    Semirandom: Each jump type will spawn outside a random house.
+    Everywhere: Jump types will spawn in every screen until you pick them up.
+    Hidden: Jump types will spawn in a random location on the map.
+    """
+    display_name = "Jump Type Spawning"
+    option_consistent = 0
+    option_semirandom = 1
+    option_everywhere = 2
+    option_hidden = 3
+    default = option_consistent
+
+class TokensPerHouse(Range):
+    """
+    Amount of tokens that will spawn in each house. Each token grants a location check.
+    """
+    display_name = "Tokens Per House"
+    range_start = 1
+    range_end = 10
+    default = 3
+
+class ExtraTokensPerLevel(Range):
+    """
+    Amount of extra tokens awarded for completing any level. Each token grants a location check.
+    """
+    display_name = "Extra Tokens Per Level"
+    range_start = 0
+    range_end = 5
+    default = 0
 
 class StatueSanityLevel(Choice):
     """
@@ -97,6 +140,57 @@ class CheckpointSanity(Toggle):
     """
     display_name = "Checkpointsanity"
 
+class LevelRandomization(Choice):
+    """
+    Determines if and how the structuring of levels is randomized.
+
+    None: Levels have no randomization.
+    Low: Each level has the order of its own gameplay segments shuffled.
+    Medium: Gameplay segments are shuffled between levels with the same jump type.
+    High: Gameplay segments are shuffled between all levels.
+    """
+    display_name = "Level Randomization"
+    option_none = 0
+    option_low = 1
+    option_medium = 2
+    option_high = 3
+    default = option_none
+
+class MaxVarietyOnHigh(Range):
+    """
+    The maximum amount of different jump types a level can contain when "high" randomization is enabled.
+    """
+    display_name = "Max Variety On High"
+    range_start = 2
+    range_end = 5
+    default = 2
+
+class GratitudeDistribution(Choice):
+    """
+    Determines how gratitude rewards (and thus location checks) are distributed among levels.
+    Note that the total amount of gratitudes available from levels will remain the same.
+
+    Standard: Each level gives the amount of gratitudes it normally would.
+    Even: All levels gives the exact same amount of gratitudes.
+    Random: Each level gives a random amount of gratitudes.
+    """
+    display_name = "Gratitude Distribution"
+    option_standard = 0
+    option_even = 1
+    option_random = 2
+
+class RandomizeLevelLocations(Toggle):
+    """
+    Determines whether the locations of levels on the map are randomized.
+    """
+    display_name = "Randomize Level Locations"
+
+class RandomizeMusic(Toggle):
+    """
+    Determines whether the music for each level is randomized.
+    """
+    display_name = "Randomize Music"
+
 @dataclass
 class SonaflekiOptions(PerGameCommonOptions):
     #game options
@@ -108,16 +202,11 @@ class SonaflekiOptions(PerGameCommonOptions):
     gratitudes_required: GratitudesRequiredPercentage
     skip_tutorials: SkipTutorials
     include_five_stars: IncludeFiveStars
+    include_tidepool = IncludeTidepool
     true_ending : TrueEnding
-    # TODO: jump type spawning
-    # spawning style (consistent, semirandom, everywhere, hidden)
-    # - consistent is outside usual house
-    # - semirandom is outside at random house
-    # - everywhere spawns on every screen until picked up
-    # - hidden spawns in a random point on the map
-    # TODO: token distribution
-    # number of tokens in each house
-    # number of extra tokens rewarded for completing a level
+    jump_type_spawning = JumpTypeSpawning
+    tokens_per_house = TokensPerHouse
+    extra_tokens_per_level = ExtraTokensPerLevel
 
     #sanity options
     statue_sanity_level: StatueSanityLevel
@@ -125,15 +214,12 @@ class SonaflekiOptions(PerGameCommonOptions):
     fetch_sanity_level: FetchSanityLevel
     checkpoint_sanity: CheckpointSanity
 
-    # TODO: randomization options
-    # level randomization (none, low, medium, high)
-    # - low shuffles segments per-level
-    # - medium shuffles segments between levels with matching jump types
-    # - high shuffles segments entirely randomly
-    # - "variety" setting for max different jump types that can exist in a level on high (default is 2, goes up to 5)
-    # randomize level locations (on the map)
-    # randomize music
-    # gratitude distribution (standard, even, or random)
+    #randomization options
+    level_randomization: LevelRandomization
+    max_variety_on_high: MaxVarietyOnHigh
+    gratitude_distribution: GratitudeDistribution
+    randomize_level_locations: RandomizeLevelLocations
+    randomize_music: RandomizeMusic
 
     # TODO: traps
     # trap fill percentage
