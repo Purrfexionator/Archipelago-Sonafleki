@@ -1,8 +1,11 @@
 from typing import Mapping, Any
 
+from BaseClasses import ItemClassification
 from worlds.AutoWorld import World
-from . import web_world
+from . import web_world, items
 from . import options as sonafleki_options
+from .items import SonaflekiItem
+
 
 class SonaflekiWorld(World):
     """
@@ -26,12 +29,10 @@ class SonaflekiWorld(World):
         pass
 
     def create_items(self) -> None:
-        # TODO: create items
-        pass
+        items.create_all_items(self)
 
     def create_item(self, name: str):
-        # TODO: create item
-        pass
+        return items.create_and_classify_item(self, name)
 
     def get_filler_item_name(self) -> str:
         return "Egg"
