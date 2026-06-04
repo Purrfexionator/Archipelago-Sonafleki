@@ -15,6 +15,8 @@ class SonaflekiWorld(World):
     options_dataclass = sonafleki_options.SonaflekiOptions
     options: sonafleki_options.SonaflekiOptions
 
+    # TODO: randomizer
+
     def create_regions(self) -> None:
         # TODO: create regions
         pass

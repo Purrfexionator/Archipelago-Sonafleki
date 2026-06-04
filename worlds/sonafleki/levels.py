@@ -1,0 +1,378 @@
+import random
+
+class LevelSegment:
+    name: str
+    num_checkpoints : int
+
+    difficulty = 0
+    jump_type = 0
+
+    def __init__(self, name: str, num_checkpoints: int = 1):
+        self.name = name
+        self.num_checkpoints = num_checkpoints
+
+class Level:
+    name: str
+    difficulty_min : int
+    difficulty_max : int
+    jump_types: list[int]
+    segments : list[LevelSegment]
+
+    num_segments = 0
+    num_checkpoints = 0
+    num_gratitudes = 0
+
+    def __init__(self, name: str, difficulty : int, jump_types: list[int], segments: list[LevelSegment]):
+        self.name = name
+        self.difficulty_min = difficulty
+        self.difficulty_max = difficulty
+        self.num_gratitudes = difficulty + 1
+        self.jump_types = jump_types
+        self.segments = segments
+
+        for segment in self.segments:
+            self.num_segments += 1
+            self.num_checkpoints += segment.num_checkpoints
+            segment.jump_type = self.jump_types[0]
+            segment.difficulty = difficulty
+
+    def segment_list(self):
+        final_list = []
+        for segment in self.segments:
+            final_list.append(segment.name)
+        return final_list
+
+class SonaflekiLevels:
+    touring_optimist = Level("Touring Optimist", 2, [0], [
+        LevelSegment("to1", 0),
+        LevelSegment("to2"),
+        LevelSegment("to3"),
+        LevelSegment("to4"),
+        LevelSegment("to5"),
+        LevelSegment("to6"),
+        LevelSegment("to7"),
+        LevelSegment("to8"),
+        LevelSegment("to9", 2)
+    ])
+
+    bamboo_catching_water = Level("Bamboo Catching Water", 2, [0], [
+        LevelSegment("bcw1", 0),
+        LevelSegment("bcw2", 2),
+        LevelSegment("bcw3"),
+        LevelSegment("bcw4", 3),
+        LevelSegment("bcw5"),
+        LevelSegment("bcw6"),
+        LevelSegment("bcw7", 2),
+        LevelSegment("bcw8"),
+        LevelSegment("bcw9")
+    ])
+
+    screen_time = Level("Screen Time", 3, [0], [
+        LevelSegment("st1", 0),
+        LevelSegment("st2"),
+        LevelSegment("st3"),
+        LevelSegment("st4"),
+        LevelSegment("st5"),
+        LevelSegment("st6", 2),
+        LevelSegment("st7"),
+        LevelSegment("st8"),
+        LevelSegment("st9")
+    ])
+
+    bluebottles = Level("Bluebottles", 2, [1], [
+        LevelSegment("bb1"),
+        LevelSegment("bb2"),
+        LevelSegment("bb3"),
+        LevelSegment("bb4"),
+        LevelSegment("bb5"),
+        LevelSegment("bb6"),
+        LevelSegment("bb7"),
+        LevelSegment("bb8")
+    ])
+
+    art_museum = Level("Art Museum", 2, [1], [
+        LevelSegment("am1", 0),
+        LevelSegment("am2"),
+        LevelSegment("am3"),
+        LevelSegment("am4"),
+        LevelSegment("am5"),
+        LevelSegment("am6"),
+        LevelSegment("am7"),
+        LevelSegment("am8"),
+        LevelSegment("am9"),
+        LevelSegment("am10"),
+        LevelSegment("am11")
+    ])
+
+    butterfly_knife = Level("Butterfly Knife", 5, [1], [
+        LevelSegment("bk1", 0),
+        LevelSegment("bk2"),
+        LevelSegment("bk3"),
+        LevelSegment("bk4"),
+        LevelSegment("bk5"),
+        LevelSegment("bk6"),
+        LevelSegment("bk7")
+    ])
+
+    urban_sift = Level("Urban Sift", 2, [2], [
+        LevelSegment("us1", 0),
+        LevelSegment("us2"),
+        LevelSegment("us3"),
+        LevelSegment("us4"),
+        LevelSegment("us5"),
+        LevelSegment("us6"),
+        LevelSegment("us7"),
+        LevelSegment("us8"),
+        LevelSegment("us9"),
+        LevelSegment("us10")
+    ])
+
+    how_i_feel = Level("How I Feel", 3, [2], [
+        LevelSegment("hif1", 0),
+        LevelSegment("hif2"),
+        LevelSegment("hif3"),
+        LevelSegment("hif4", 2),
+        LevelSegment("hif5"),
+        LevelSegment("hif6"),
+        LevelSegment("hif7"),
+        LevelSegment("hif8"),
+        LevelSegment("hif9")
+    ])
+
+    nanoseconds = Level("Nanoseconds", 4, [2], [
+        LevelSegment("ns1", 0),
+        LevelSegment("ns2"),
+        LevelSegment("ns3"),
+        LevelSegment("ns4"),
+        LevelSegment("ns5"),
+        LevelSegment("ns6"),
+        LevelSegment("ns7"),
+        LevelSegment("ns8"),
+        LevelSegment("ns9")
+    ])
+
+    voices = Level("Voices", 2, [3], [
+        LevelSegment("vc1", 0),
+        LevelSegment("vc2"),
+        LevelSegment("vc3"),
+        LevelSegment("vc4"),
+        LevelSegment("vc5"),
+        LevelSegment("vc6"),
+        LevelSegment("vc7", 2),
+        LevelSegment("vc8"),
+        LevelSegment("vc9")
+    ])
+
+    oil_slick = Level("Oil Slick", 3, [3], [
+        LevelSegment("os1"),
+        LevelSegment("os2"),
+        LevelSegment("os3"),
+        LevelSegment("os4"),
+        LevelSegment("os5"),
+        LevelSegment("os6"),
+        LevelSegment("os7"),
+        LevelSegment("os8"),
+        LevelSegment("os9"),
+        LevelSegment("os10")
+    ])
+
+    six_ft_pool_end = Level("6ft Pool End", 4, [3], [
+        LevelSegment("6ft1", 0),
+        LevelSegment("6ft2"),
+        LevelSegment("6ft3"),
+        LevelSegment("6ft4"),
+        LevelSegment("6ft5"),
+        LevelSegment("6ft6", 2),
+        LevelSegment("6ft7"),
+        LevelSegment("6ft8"),
+        LevelSegment("6ft9")
+    ])
+
+    bird_bath = Level("Bird Bath", 2, [4], [
+        LevelSegment("bb1", 0),
+        LevelSegment("bb2"),
+        LevelSegment("bb3"),
+        LevelSegment("bb4"),
+        LevelSegment("bb5"),
+        LevelSegment("bb6"),
+        LevelSegment("bb7"),
+        LevelSegment("bb8"),
+        LevelSegment("bb9")
+    ])
+
+    pheromones = Level("Pheromones", 3, [4], [
+        LevelSegment("ph1", 0),
+        LevelSegment("ph2"),
+        LevelSegment("ph3"),
+        LevelSegment("ph4"),
+        LevelSegment("ph5"),
+        LevelSegment("ph6"),
+        LevelSegment("ph7"),
+        LevelSegment("ph8"),
+        LevelSegment("ph9"),
+        LevelSegment("ph10")
+    ])
+
+    ozone = Level("Ozone", 5, [4], [
+        LevelSegment("oz1"),
+        LevelSegment("oz2"),
+        LevelSegment("oz3", 2),
+        LevelSegment("oz4"),
+        LevelSegment("oz5", 2),
+        LevelSegment("oz6"),
+        LevelSegment("oz7"),
+        LevelSegment("oz8")
+    ])
+
+    base_levels = [
+        touring_optimist,
+        bamboo_catching_water,
+        screen_time,
+        bluebottles,
+        art_museum,
+        urban_sift,
+        how_i_feel,
+        nanoseconds,
+        voices,
+        oil_slick,
+        six_ft_pool_end,
+        bird_bath,
+        pheromones
+    ]
+
+    hard_levels = [
+        butterfly_knife,
+        ozone
+    ]
+
+    # : SonaflekiWorld
+
+    #def __init__(self, world : SonaflekiWorld):
+    #    self.world = world
+
+    def randomize(self, amount : int):
+        all_levels = self.base_levels + self.hard_levels
+
+        # per level randomization
+        if amount == 1:
+            for level in all_levels:
+                #assemble pool (ignoring endpoints)
+                pool = []
+                for i in range(1, level.num_segments - 1):
+                    pool.append(level.segments[i])
+
+                # TODO: REPLACE WITH WORLD RANDOM
+                random.shuffle(pool)
+
+                # assign new midpoint segments from pool
+                for i in range(1, level.num_segments - 1):
+                    level.segments[i] = pool.pop()
+
+        # matching jump types
+        if amount >= 2:
+            #initialize pools
+            openers = [[], [], [], [], []]
+            middles = [[], [], [], [], []]
+            closers = [[], [], [], [], []]
+
+            #populate pools
+            for level in all_levels:
+                jump_type = level.jump_types[0]
+                openers[jump_type].append(level.segments[0])
+                closers[jump_type].append(level.segments[-1])
+                for i in range(1, level.num_segments - 1):
+                    middles[jump_type].append(level.segments[i])
+
+            # TODO: REPLACE WITH WORLD RANDOM
+            for i in range(5):
+                random.shuffle(openers[i])
+                random.shuffle(middles[i])
+                random.shuffle(closers[i])
+
+            #assemble new levels
+            for level in all_levels:
+                jump_type = level.jump_types[0]
+                level.segments[0] = openers[jump_type].pop()
+                level.segments[-1] = closers[jump_type].pop()
+                for i in range(1, level.num_segments - 1):
+                    level.segments[i] = middles[jump_type].pop()
+
+        # all levels (uses type 2 as a starting point)
+        if amount == 3:
+            # TODO: feed this in via options
+            max_variety = 2
+
+            level_pool = all_levels
+            shuffle_groups = []
+
+            # TODO: REPLACE WITH WORLD RANDOM
+            random.shuffle(level_pool)
+
+            # create "shuffle groups" to ensure max_variety rules are respected and
+            # every level is guaranteed access to the exact amount of segments it needs
+            while not len(level_pool) == 0:
+                if len(level_pool) >= max_variety:
+                    shuffle_group = level_pool[:max_variety]
+                    level_pool = level_pool[max_variety:]
+                    shuffle_groups.append(shuffle_group)
+                else:
+                    shuffle_group = level_pool
+                    level_pool = []
+                    shuffle_groups.append(shuffle_group)
+
+            for group in shuffle_groups:
+                # initialize group pools
+                openers = []
+                middles = []
+                closers = []
+
+                # populate group pools
+                for level in group:
+                    openers.append(level.segments[0])
+                    closers.append(level.segments[-1])
+                    for i in range(1, level.num_segments - 1):
+                        middles.append(level.segments[i])
+
+                # TODO: REPLACE WITH WORLD RANDOM
+                random.shuffle(openers)
+                random.shuffle(middles)
+                random.shuffle(closers)
+
+                # shuffle levels in group
+                for level in group:
+                    level.segments[0] = openers.pop()
+                    level.segments[-1] = closers.pop()
+                    for i in range(1, level.num_segments - 1):
+                        level.segments[i] = middles.pop()
+
+        for level in all_levels:
+            level.jump_types = []
+            level.num_checkpoints = 0
+            level.difficulty_min = level.segments[0].difficulty
+            level.difficulty_max = level.difficulty_min
+            for segment in level.segments:
+                level.num_checkpoints += segment.num_checkpoints
+                level.difficulty_min = min(level.difficulty_min, segment.difficulty)
+                level.difficulty_max = max(level.difficulty_max, segment.difficulty)
+                if segment.jump_type not in level.jump_types:
+                    level.jump_types.append(segment.jump_type)
+
+    def print_levels(self):
+        print()
+
+        all_levels = self.base_levels + self.hard_levels
+        for level in all_levels:
+            print(level.name)
+            print("Checkpoints:", level.num_checkpoints, end = " | ")
+            print("Difficulty:", level.difficulty_min, "to", level.difficulty_max, end = " | ")
+            print("Gratitudes:", level.num_gratitudes, end=" | ")
+            print("Jump Types:", level.jump_types)
+            print("Segments:", level.segment_list())
+            print()
+
+def debug():
+    test = SonaflekiLevels()
+    test.randomize(3)
+    test.print_levels()
+
+#debug()
