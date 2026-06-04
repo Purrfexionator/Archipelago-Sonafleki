@@ -4,6 +4,7 @@ from BaseClasses import ItemClassification
 from worlds.AutoWorld import World
 from . import web_world, items
 from . import options as sonafleki_options
+from .Data import ItemNames
 from .items import SonaflekiItem
 
 
@@ -17,6 +18,8 @@ class SonaflekiWorld(World):
     web = web_world.SonaflekiWebWorld()
     options_dataclass = sonafleki_options.SonaflekiOptions
     options: sonafleki_options.SonaflekiOptions
+
+    item_name_to_id = ItemNames.get_mapping()
 
     # TODO: randomizer
 
@@ -35,7 +38,7 @@ class SonaflekiWorld(World):
         return items.create_and_classify_item(self, name)
 
     def get_filler_item_name(self) -> str:
-        return "Egg"
+        return ItemNames.egg
 
     def fill_slot_data(self) -> Mapping[str, Any]:
         # TODO: write room ordering and options
