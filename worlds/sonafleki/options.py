@@ -106,7 +106,7 @@ class StatueSanityLevel(Choice):
     option_insane = 3
     default = option_standard
 
-class TeleportSanityLevel(Toggle):
+class TeleportSanityLevel(Choice):
     """
     Determines if and how overworld teleporters are shuffled into the item pool.
 
