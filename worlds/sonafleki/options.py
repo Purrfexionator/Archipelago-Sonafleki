@@ -177,7 +177,7 @@ class GratitudeDistribution(Choice):
     display_name = "Gratitude Distribution"
     option_standard = 0
     option_even = 1
-    option_random = 2
+    option_randomized = 2
 
 class RandomizeLevelLocations(Toggle):
     """
@@ -266,11 +266,11 @@ class SonaflekiOptions(PerGameCommonOptions):
     gratitudes_required: GratitudesRequiredPercentage
     skip_tutorials: SkipTutorials
     include_five_stars: IncludeFiveStars
-    include_tidepool = IncludeTidepool
+    include_tidepool : IncludeTidepool
     true_ending : TrueEnding
-    jump_type_spawning = JumpTypeSpawning
-    tokens_per_house = TokensPerHouse
-    extra_tokens_per_level = ExtraTokensPerLevel
+    jump_type_spawning : JumpTypeSpawning
+    tokens_per_house : TokensPerHouse
+    extra_tokens_per_level : ExtraTokensPerLevel
 
     #sanity options
     statue_sanity_level: StatueSanityLevel

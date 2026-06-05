@@ -1,7 +1,11 @@
+from __future__ import annotations
 from BaseClasses import Region, Location
-from worlds.sonafleki import SonaflekiWorld
 from .Data import LocationNames
 from . import items
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from .world import SonaflekiWorld
 
 class SonaflekiLocation(Location):
     game = "SONAFLEKI"

@@ -1,6 +1,10 @@
+from __future__ import annotations
 from BaseClasses import Item, ItemClassification
-from .world import SonaflekiWorld
 from .Data import ItemNames
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from .world import SonaflekiWorld
 
 class SonaflekiItem(Item):
     game = "SONAFLEKI"

@@ -1,7 +1,7 @@
-import random
-
-from worlds.sonafleki import SonaflekiWorld
-
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from .world import SonaflekiWorld
 
 class LevelSegment:
     name: str

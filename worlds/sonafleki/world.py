@@ -1,12 +1,9 @@
 from typing import Mapping, Any
 
-import locations
-from BaseClasses import ItemClassification
 from worlds.AutoWorld import World
-from . import web_world, items, levels
+from . import web_world, items, levels, locations
 from . import options as sonafleki_options
 from .Data import ItemNames, LocationNames
-from .items import SonaflekiItem
 
 
 class SonaflekiWorld(World):
