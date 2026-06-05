@@ -1,7 +1,7 @@
 from __future__ import annotations
 from BaseClasses import Region, Location
 from .Data import LocationNames
-from . import items
+from . import items, levels
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -20,7 +20,7 @@ def create_and_connect_regions(world : SonaflekiWorld):
 
     # add house regions
     for house in LocationNames.houses:
-        region = Region(house.name, world.player, world.multiworld)
+        region = Region(house, world.player, world.multiworld)
         regions.append(region)
 
     # add tutorial regions if included
@@ -31,12 +31,12 @@ def create_and_connect_regions(world : SonaflekiWorld):
             regions.append(region)
 
     # retrieve level data
-    levels = world.level_data.base_levels
+    active_levels = world.level_data.base_levels
     if world.options.include_five_stars:
-        levels += world.level_data.hard_levels
+        active_levels += world.level_data.hard_levels
 
     # create level regions
-    for level in levels:
+    for level in active_levels:
         region = Region(level.name, world.player, world.multiworld)
         regions.append(region)
 
@@ -55,7 +55,7 @@ def create_and_connect_regions(world : SonaflekiWorld):
         for tutorial in tutorials:
             region = world.get_region(tutorial)
             overworld_region.connect(region, "to " + tutorial)
-    for level in levels:
+    for level in active_levels:
         region = world.get_region(level.name)
         overworld_region.connect(region, "to " + level.name)
 
@@ -94,7 +94,7 @@ def create_locations(world : SonaflekiWorld):
 
     # next up, populate each house with the amount of tokens specified in options
     for house in LocationNames.houses:
-        region = world.get_region(house.name)
+        region = world.get_region(house)
         tokens = []
         token_count = world.options.tokens_per_house.value
         for i in range(token_count):
@@ -103,27 +103,27 @@ def create_locations(world : SonaflekiWorld):
         region.add_locations(get_location_names_with_ids(world, tokens), SonaflekiLocation)
 
     # now that overworld is done, create gratitude and token locations for each level
-    levels = world.level_data.base_levels
+    active_levels = world.level_data.base_levels
     if world.options.include_five_stars:
-        levels += world.level_data.hard_levels
+        active_levels += world.level_data.hard_levels
 
-    for level in levels:
+    for level in active_levels:
         region = world.get_region(level.name)
         rewards = []
 
         for i in range(level.num_gratitudes):
-            gratitude = level + LocationNames.gratitude_prefix + LocationNames.level_gratitude_suffixes[i]
+            gratitude = level.name + LocationNames.gratitude_prefix + LocationNames.level_gratitude_suffixes[i]
             rewards.append(gratitude)
 
         token_count = world.options.extra_tokens_per_level.value
         if (token_count > 0):
             for i in range(token_count):
-                token = level + LocationNames.token_prefix + LocationNames.level_token_suffixes[i]
+                token = level.name + LocationNames.token_prefix + LocationNames.level_token_suffixes[i]
                 rewards.append(token)
 
         if world.options.checkpoint_sanity:
             for i in range(level.num_checkpoints):
-                checkpoint = level + LocationNames.checkpoint_prefix + LocationNames.checkpoint_suffixes[i]
+                checkpoint = level.name + LocationNames.checkpoint_prefix + LocationNames.checkpoint_suffixes[i]
                 rewards.append(checkpoint)
 
         region.add_locations(get_location_names_with_ids(world, rewards), SonaflekiLocation)

@@ -20,32 +20,32 @@ traps = ["Trap 1", "Trap 2", "Trap 3"]
 
 def get_mapping():
     mapping = {}
-    index = 0
+    index = 1
 
     standard_names = (jump_types + statue_types + fetch_items +
                       [all_statues, all_teleporters, all_fetch_items])
 
     for name in standard_names:
-        mapping[index] = name
+        mapping[name] = index
         index += 1
 
     for statue_prefix in statue_prefixes:
         for statue_suffix in statue_suffixes:
             name = statue_prefix + statue_suffix
-            mapping[index] = name
+            mapping[name] = index
             index += 1
 
     for teleporter_suffix in teleporter_suffixes:
         name = teleporter_prefix + teleporter_suffix
-        mapping[index] = name
+        mapping[name] = index
         index += 1
 
-    mapping[index] = gratitude
-    mapping[index + 1] = egg
+    mapping[gratitude] = index
+    mapping[egg] = index + 1
     index += 2
 
     for trap in traps:
-        mapping[index] = trap
+        mapping[trap] = index
         index += 1
 
     return mapping

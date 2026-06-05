@@ -19,16 +19,17 @@ class SonaflekiWorld(World):
 
     item_name_to_id = ItemNames.get_mapping()
     location_name_to_id = LocationNames.get_mapping()
+    origin_region_name = "Overworld"
 
     level_data : levels.SonaflekiLevels
     starting_jump : int
 
     def generate_early(self) -> None:
-        level_data = levels.SonaflekiLevels(self)
-        starting_jump = self.random.randint(0, 4)
+        self.level_data = levels.SonaflekiLevels(self)
+        self.starting_jump = self.random.randint(0, 4)
         randomization = self.options.level_randomization.value
         if randomization > 0:
-            level_data.randomize(randomization)
+            self.level_data.randomize(randomization)
 
     def create_regions(self) -> None:
         locations.create_and_connect_regions(self)

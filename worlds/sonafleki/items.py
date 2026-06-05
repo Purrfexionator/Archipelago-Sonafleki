@@ -86,7 +86,7 @@ def create_all_items(world : SonaflekiWorld):
     # add filler items
     num_items = len(item_pool)
     num_unfilled = len(world.multiworld.get_unfilled_locations(world.player))
-    filler_count = num_items - num_unfilled
+    filler_count = num_unfilled - num_items
     item_pool += [world.create_filler() for _ in range(filler_count)]
 
     #TODO: traps

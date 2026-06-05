@@ -59,53 +59,53 @@ checkpoint_suffixes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", 
 
 def get_mapping():
     mapping = {}
-    index = 0
+    index = 1
 
     for level in levels:
         for suffix in level_gratitude_suffixes:
             name = level + gratitude_prefix + suffix
-            mapping[index] = name
+            mapping[name] = index
             index += 1
         for suffix in level_token_suffixes:
             name = level + token_prefix + suffix
-            mapping[index] = name
+            mapping[name] = index
             index += 1
         for suffix in checkpoint_suffixes:
             name = level + checkpoint_prefix + suffix
-            mapping[index] = name
+            mapping[name] = index
             index += 1
 
     for house in houses:
         for suffix in house_token_suffixes:
             name = house + token_prefix + suffix
-            mapping[index] = name
+            mapping[name] = index
             index += 1
 
     for tutorial in tutorials:
         name = tutorial + single_gratitude_suffix
-        mapping[index] = name
+        mapping[name] = index
         index += 1
 
     for statue_prefix in statue_prefixes:
         for statue_suffix in statue_suffixes:
             name = statue_prefix + statue_suffix + single_gratitude_suffix
-            mapping[index] = name
+            mapping[name] = index
             index += 1
 
     for teleporter_suffix in teleporter_suffixes:
         name = teleporter_prefix + teleporter_suffix + single_gratitude_suffix
-        mapping[index] = name
+        mapping[name] = index
         index += 1
 
     for fetch_item in fetch_items:
         for suffix in fetch_gratitude_suffixes:
             name = fetch_item + gratitude_prefix + suffix
-            mapping[index] = name
+            mapping[name] = index
             index += 1
 
     for suffix in overworld_gratitude_suffixes:
         name = overworld_gratitude_prefix + suffix
-        mapping[index] = name
+        mapping[name] = index
         index += 1
 
     return mapping
