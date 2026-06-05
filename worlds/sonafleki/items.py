@@ -34,8 +34,13 @@ def create_all_items(world : SonaflekiWorld):
         item_pool.append(world.create_item(ItemNames.gratitude))
 
     # add jump types
-    for jump in ItemNames.jump_types:
-        item_pool.append(world.create_item(jump))
+    for i in range(5):
+        if i != world.starting_jump:
+            name = ItemNames.jump_types[i]
+            item_pool.append(world.create_item(name))
+    if world.options.include_tidepool:
+        name = ItemNames.jump_types[-1]
+        item_pool.append(world.create_item(name))
 
     # add statues (depending on statue sanity level)
     statue_sanity = world.options.statue_sanity_level

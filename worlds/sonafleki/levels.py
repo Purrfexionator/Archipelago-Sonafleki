@@ -1,5 +1,8 @@
 import random
 
+from worlds.sonafleki import SonaflekiWorld
+
+
 class LevelSegment:
     name: str
     num_checkpoints : int
@@ -245,24 +248,26 @@ class SonaflekiLevels:
         ozone
     ]
 
-    # : SonaflekiWorld
+    world : SonaflekiWorld
 
-    #def __init__(self, world : SonaflekiWorld):
-    #    self.world = world
+    def __init__(self, world : SonaflekiWorld):
+        self.world = world
 
     def randomize(self, amount : int):
-        all_levels = self.base_levels + self.hard_levels
+        all_levels = self.base_levels
+        if self.world.options.include_five_stars:
+            all_levels += self.hard_levels
 
         # per level randomization
         if amount == 1:
             for level in all_levels:
-                #assemble pool (ignoring endpoints)
+                # assemble pool (ignoring endpoints)
                 pool = []
                 for i in range(1, level.num_segments - 1):
                     pool.append(level.segments[i])
 
-                # TODO: REPLACE WITH WORLD RANDOM
-                random.shuffle(pool)
+                # randomize pool
+                self.world.random.shuffle(pool)
 
                 # assign new midpoint segments from pool
                 for i in range(1, level.num_segments - 1):
@@ -270,12 +275,12 @@ class SonaflekiLevels:
 
         # matching jump types
         if amount >= 2:
-            #initialize pools
+            # initialize pools
             openers = [[], [], [], [], []]
             middles = [[], [], [], [], []]
             closers = [[], [], [], [], []]
 
-            #populate pools
+            # populate pools
             for level in all_levels:
                 jump_type = level.jump_types[0]
                 openers[jump_type].append(level.segments[0])
@@ -283,13 +288,13 @@ class SonaflekiLevels:
                 for i in range(1, level.num_segments - 1):
                     middles[jump_type].append(level.segments[i])
 
-            # TODO: REPLACE WITH WORLD RANDOM
+            # randomize pools
             for i in range(5):
-                random.shuffle(openers[i])
-                random.shuffle(middles[i])
-                random.shuffle(closers[i])
+                self.world.random.shuffle(openers[i])
+                self.world.random.shuffle(middles[i])
+                self.world.random.shuffle(closers[i])
 
-            #assemble new levels
+            # assemble new levels
             for level in all_levels:
                 jump_type = level.jump_types[0]
                 level.segments[0] = openers[jump_type].pop()
@@ -299,14 +304,12 @@ class SonaflekiLevels:
 
         # all levels (uses type 2 as a starting point)
         if amount == 3:
-            # TODO: feed this in via options
-            max_variety = 2
+            max_variety = self.world.options.max_variety_on_high
 
             level_pool = all_levels
             shuffle_groups = []
 
-            # TODO: REPLACE WITH WORLD RANDOM
-            random.shuffle(level_pool)
+            self.world.random.shuffle(level_pool)
 
             # create "shuffle groups" to ensure max_variety rules are respected and
             # every level is guaranteed access to the exact amount of segments it needs
@@ -333,10 +336,10 @@ class SonaflekiLevels:
                     for i in range(1, level.num_segments - 1):
                         middles.append(level.segments[i])
 
-                # TODO: REPLACE WITH WORLD RANDOM
-                random.shuffle(openers)
-                random.shuffle(middles)
-                random.shuffle(closers)
+                # randomize pools
+                self.world.random.shuffle(openers)
+                self.world.random.shuffle(middles)
+                self.world.random.shuffle(closers)
 
                 # shuffle levels in group
                 for level in group:
@@ -369,10 +372,3 @@ class SonaflekiLevels:
             print("Jump Types:", level.jump_types)
             print("Segments:", level.segment_list())
             print()
-
-def debug():
-    test = SonaflekiLevels()
-    test.randomize(3)
-    test.print_levels()
-
-#debug()

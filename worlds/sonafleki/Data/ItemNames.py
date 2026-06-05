@@ -1,4 +1,4 @@
-jump_types = [ "Double Jump", "Quad Jump", "Flutter Jump", "Dip Jump", "Invert Jump"]
+jump_types = [ "Double Jump", "Quad Jump", "Flutter Jump", "Dip Jump", "Invert Jump", "Dive Jump"]
 
 all_statues = "All Statues"
 all_teleporters = "All Teleporters"
@@ -47,3 +47,5 @@ def get_mapping():
     for trap in traps:
         mapping[index] = trap
         index += 1
+
+    return mapping

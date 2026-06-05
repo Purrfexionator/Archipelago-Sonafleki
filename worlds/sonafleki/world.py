@@ -1,10 +1,11 @@
 from typing import Mapping, Any
 
+import locations
 from BaseClasses import ItemClassification
 from worlds.AutoWorld import World
-from . import web_world, items
+from . import web_world, items, levels
 from . import options as sonafleki_options
-from .Data import ItemNames
+from .Data import ItemNames, LocationNames
 from .items import SonaflekiItem
 
 
@@ -20,12 +21,21 @@ class SonaflekiWorld(World):
     options: sonafleki_options.SonaflekiOptions
 
     item_name_to_id = ItemNames.get_mapping()
+    location_name_to_id = LocationNames.get_mapping()
 
-    # TODO: randomizer
+    level_data : levels.SonaflekiLevels
+    starting_jump : int
+
+    def generate_early(self) -> None:
+        level_data = levels.SonaflekiLevels(self)
+        starting_jump = self.random.randint(0, 4)
+        randomization = self.options.level_randomization.value
+        if randomization > 0:
+            level_data.randomize(randomization)
 
     def create_regions(self) -> None:
-        # TODO: create regions
-        pass
+        locations.create_and_connect_regions(self)
+        locations.create_locations(self)
 
     def set_rules(self) -> None:
         # TODO: set rules
