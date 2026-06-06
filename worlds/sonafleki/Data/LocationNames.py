@@ -26,10 +26,10 @@ houses = [
 
 tutorials = [
     "Double Jump Tutorial",
-    "Quad Jump Tutorial",
     "Flutter Jump Tutorial",
-    "Dip Jump Tutorial",
+    "Quad Jump Tutorial",
     "Invert Jump Tutorial",
+    "Dip Jump Tutorial",
     "Dive Jump Tutorial"
 ]
 

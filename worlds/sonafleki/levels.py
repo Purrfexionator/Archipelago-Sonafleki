@@ -46,6 +46,7 @@ class Level:
         return final_list
 
 class SonaflekiLevels:
+    # double jump levels
     touring_optimist = Level("Touring Optimist", 2, [0], [
         LevelSegment("to1", 0),
         LevelSegment("to2"),
@@ -82,7 +83,46 @@ class SonaflekiLevels:
         LevelSegment("st9")
     ])
 
-    bluebottles = Level("Bluebottles", 2, [1], [
+    # flutter jump levels
+    urban_sift = Level("Urban Sift", 2, [1], [
+        LevelSegment("us1", 0),
+        LevelSegment("us2"),
+        LevelSegment("us3"),
+        LevelSegment("us4"),
+        LevelSegment("us5"),
+        LevelSegment("us6"),
+        LevelSegment("us7"),
+        LevelSegment("us8"),
+        LevelSegment("us9"),
+        LevelSegment("us10")
+    ])
+
+    how_i_feel = Level("How I Feel", 3, [1], [
+        LevelSegment("hif1", 0),
+        LevelSegment("hif2"),
+        LevelSegment("hif3"),
+        LevelSegment("hif4", 2),
+        LevelSegment("hif5"),
+        LevelSegment("hif6"),
+        LevelSegment("hif7"),
+        LevelSegment("hif8"),
+        LevelSegment("hif9")
+    ])
+
+    nanoseconds = Level("Nanoseconds", 4, [1], [
+        LevelSegment("ns1", 0),
+        LevelSegment("ns2"),
+        LevelSegment("ns3"),
+        LevelSegment("ns4"),
+        LevelSegment("ns5"),
+        LevelSegment("ns6"),
+        LevelSegment("ns7"),
+        LevelSegment("ns8"),
+        LevelSegment("ns9")
+    ])
+
+    # quad jump levels
+    bluebottles = Level("Bluebottles", 2, [2], [
         LevelSegment("bb1"),
         LevelSegment("bb2"),
         LevelSegment("bb3"),
@@ -93,7 +133,7 @@ class SonaflekiLevels:
         LevelSegment("bb8")
     ])
 
-    art_museum = Level("Art Museum", 2, [1], [
+    art_museum = Level("Art Museum", 2, [2], [
         LevelSegment("am1", 0),
         LevelSegment("am2"),
         LevelSegment("am3"),
@@ -107,7 +147,7 @@ class SonaflekiLevels:
         LevelSegment("am11")
     ])
 
-    butterfly_knife = Level("Butterfly Knife", 5, [1], [
+    butterfly_knife = Level("Butterfly Knife", 5, [2], [
         LevelSegment("bk1", 0),
         LevelSegment("bk2"),
         LevelSegment("bk3"),
@@ -117,81 +157,8 @@ class SonaflekiLevels:
         LevelSegment("bk7")
     ])
 
-    urban_sift = Level("Urban Sift", 2, [2], [
-        LevelSegment("us1", 0),
-        LevelSegment("us2"),
-        LevelSegment("us3"),
-        LevelSegment("us4"),
-        LevelSegment("us5"),
-        LevelSegment("us6"),
-        LevelSegment("us7"),
-        LevelSegment("us8"),
-        LevelSegment("us9"),
-        LevelSegment("us10")
-    ])
-
-    how_i_feel = Level("How I Feel", 3, [2], [
-        LevelSegment("hif1", 0),
-        LevelSegment("hif2"),
-        LevelSegment("hif3"),
-        LevelSegment("hif4", 2),
-        LevelSegment("hif5"),
-        LevelSegment("hif6"),
-        LevelSegment("hif7"),
-        LevelSegment("hif8"),
-        LevelSegment("hif9")
-    ])
-
-    nanoseconds = Level("Nanoseconds", 4, [2], [
-        LevelSegment("ns1", 0),
-        LevelSegment("ns2"),
-        LevelSegment("ns3"),
-        LevelSegment("ns4"),
-        LevelSegment("ns5"),
-        LevelSegment("ns6"),
-        LevelSegment("ns7"),
-        LevelSegment("ns8"),
-        LevelSegment("ns9")
-    ])
-
-    voices = Level("Voices", 2, [3], [
-        LevelSegment("vc1", 0),
-        LevelSegment("vc2"),
-        LevelSegment("vc3"),
-        LevelSegment("vc4"),
-        LevelSegment("vc5"),
-        LevelSegment("vc6"),
-        LevelSegment("vc7", 2),
-        LevelSegment("vc8"),
-        LevelSegment("vc9")
-    ])
-
-    oil_slick = Level("Oil Slick", 3, [3], [
-        LevelSegment("os1"),
-        LevelSegment("os2"),
-        LevelSegment("os3"),
-        LevelSegment("os4"),
-        LevelSegment("os5"),
-        LevelSegment("os6"),
-        LevelSegment("os7"),
-        LevelSegment("os8"),
-        LevelSegment("os9"),
-        LevelSegment("os10")
-    ])
-
-    six_ft_pool_end = Level("6ft Pool End", 4, [3], [
-        LevelSegment("6ft1", 0),
-        LevelSegment("6ft2"),
-        LevelSegment("6ft3"),
-        LevelSegment("6ft4"),
-        LevelSegment("6ft5"),
-        LevelSegment("6ft6", 2),
-        LevelSegment("6ft7"),
-        LevelSegment("6ft8"),
-        LevelSegment("6ft9")
-    ])
-
-    bird_bath = Level("Bird Bath", 2, [4], [
+    # invert jump
+    bird_bath = Level("Bird Bath", 2, [3], [
         LevelSegment("bb1", 0),
         LevelSegment("bb2"),
         LevelSegment("bb3"),
@@ -203,7 +170,7 @@ class SonaflekiLevels:
         LevelSegment("bb9")
     ])
 
-    pheromones = Level("Pheromones", 3, [4], [
+    pheromones = Level("Pheromones", 3, [3], [
         LevelSegment("ph1", 0),
         LevelSegment("ph2"),
         LevelSegment("ph3"),
@@ -216,7 +183,8 @@ class SonaflekiLevels:
         LevelSegment("ph10")
     ])
 
-    ozone = Level("Ozone", 5, [4], [
+    # dip jump
+    ozone = Level("Ozone", 5, [3], [
         LevelSegment("oz1"),
         LevelSegment("oz2"),
         LevelSegment("oz3", 2),
@@ -227,20 +195,57 @@ class SonaflekiLevels:
         LevelSegment("oz8")
     ])
 
+    voices = Level("Voices", 2, [4], [
+        LevelSegment("vc1", 0),
+        LevelSegment("vc2"),
+        LevelSegment("vc3"),
+        LevelSegment("vc4"),
+        LevelSegment("vc5"),
+        LevelSegment("vc6"),
+        LevelSegment("vc7", 2),
+        LevelSegment("vc8"),
+        LevelSegment("vc9")
+    ])
+
+    oil_slick = Level("Oil Slick", 3, [4], [
+        LevelSegment("os1"),
+        LevelSegment("os2"),
+        LevelSegment("os3"),
+        LevelSegment("os4"),
+        LevelSegment("os5"),
+        LevelSegment("os6"),
+        LevelSegment("os7"),
+        LevelSegment("os8"),
+        LevelSegment("os9"),
+        LevelSegment("os10")
+    ])
+
+    six_ft_pool_end = Level("6ft Pool End", 4, [4], [
+        LevelSegment("6ft1", 0),
+        LevelSegment("6ft2"),
+        LevelSegment("6ft3"),
+        LevelSegment("6ft4"),
+        LevelSegment("6ft5"),
+        LevelSegment("6ft6", 2),
+        LevelSegment("6ft7"),
+        LevelSegment("6ft8"),
+        LevelSegment("6ft9")
+    ])
+
     base_levels = [
         touring_optimist,
         bamboo_catching_water,
         screen_time,
-        bluebottles,
-        art_museum,
         urban_sift,
         how_i_feel,
         nanoseconds,
+        bluebottles,
+        art_museum,
+        bird_bath,
+        pheromones,
         voices,
         oil_slick,
-        six_ft_pool_end,
-        bird_bath,
-        pheromones
+        six_ft_pool_end
     ]
 
     hard_levels = [
