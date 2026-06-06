@@ -46,7 +46,7 @@ def create_and_connect_regions(world : SonaflekiWorld):
     # create connections
     overworld_region = world.get_region("Overworld")
     ascension_region = world.get_region("Ascension")
-    overworld_region.connect(ascension_region, "to " + "Ascension")
+    overworld_region.connect(ascension_region, "to Ascension")
     for house in LocationNames.houses:
         region = world.get_region(house)
         overworld_region.connect(region, "to " + house)

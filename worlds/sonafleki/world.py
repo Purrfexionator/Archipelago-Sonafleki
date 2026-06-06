@@ -2,7 +2,7 @@ from typing import Mapping, Any
 from unittest import case
 
 from worlds.AutoWorld import World
-from . import web_world, items, levels, locations
+from . import web_world, items, levels, locations, rules
 from . import options as sonafleki_options
 from .Data import ItemNames, LocationNames
 
@@ -94,8 +94,7 @@ class SonaflekiWorld(World):
         locations.create_locations(self)
 
     def set_rules(self) -> None:
-        # TODO: set rules
-        pass
+        rules.set_all_rules(self)
 
     def create_items(self) -> None:
         items.create_all_items(self)

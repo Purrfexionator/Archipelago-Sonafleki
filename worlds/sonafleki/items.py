@@ -93,3 +93,7 @@ def create_all_items(world : SonaflekiWorld):
     #TODO: traps
 
     world.multiworld.itempool += item_pool
+
+    # precollect starting jump type (for logic)
+    starting_jump = world.create_item(ItemNames.jump_types[world.starting_jump])
+    world.push_precollected(starting_jump)
