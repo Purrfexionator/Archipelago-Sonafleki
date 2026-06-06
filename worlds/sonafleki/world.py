@@ -1,4 +1,4 @@
-from typing import Mapping, Any
+from typing import Mapping, Any, TextIO
 from unittest import case
 
 from worlds.AutoWorld import World
@@ -106,5 +106,10 @@ class SonaflekiWorld(World):
         return ItemNames.egg
 
     def fill_slot_data(self) -> Mapping[str, Any]:
-        # TODO: write room ordering and options
-        return {}
+        return {
+            "level_data": self.level_data.get_mapping()
+        }
+
+    def write_spoiler(self, spoiler_handle: TextIO) -> None:
+        spoiler_handle.write("\nLevel Data:")
+        spoiler_handle.write(self.level_data.get_level_string())

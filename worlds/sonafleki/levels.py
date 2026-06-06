@@ -1,4 +1,6 @@
 from __future__ import annotations
+from .Data import ItemNames
+
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .world import SonaflekiWorld
@@ -44,6 +46,15 @@ class Level:
         for segment in self.segments:
             final_list.append(segment.name)
         return final_list
+
+    def get_mapping(self):
+        return {
+            "name" : self.name,
+            "difficulty" : [self.difficulty_min, self.difficulty_max],
+            "gratitudes" : self.num_gratitudes,
+            "jump_types" : self.jump_types,
+            "segments" : self.segment_list()
+        }
 
 class SonaflekiLevels:
     # double jump levels
@@ -183,7 +194,6 @@ class SonaflekiLevels:
         LevelSegment("ph10")
     ])
 
-    # dip jump
     ozone = Level("Ozone", 5, [3], [
         LevelSegment("oz1"),
         LevelSegment("oz2"),
@@ -195,6 +205,7 @@ class SonaflekiLevels:
         LevelSegment("oz8")
     ])
 
+    # dip jump
     voices = Level("Voices", 2, [4], [
         LevelSegment("vc1", 0),
         LevelSegment("vc2"),
@@ -365,15 +376,51 @@ class SonaflekiLevels:
                 if segment.jump_type not in level.jump_types:
                     level.jump_types.append(segment.jump_type)
 
-    def print_levels(self):
-        print()
+    def get_level_string(self):
+        all_levels = self.base_levels
+        if self.world.options.include_five_stars:
+            all_levels += self.hard_levels
 
-        all_levels = self.base_levels + self.hard_levels
+        string = ""
         for level in all_levels:
-            print(level.name)
-            print("Checkpoints:", level.num_checkpoints, end = " | ")
-            print("Difficulty:", level.difficulty_min, "to", level.difficulty_max, end = " | ")
-            print("Gratitudes:", level.num_gratitudes, end=" | ")
-            print("Jump Types:", level.jump_types)
-            print("Segments:", level.segment_list())
-            print()
+            string += "\n\n" + level.name + "\n"
+            string += "Checkpoints: " + str(level.num_checkpoints) + " | "
+            string += "Difficulty: " + str(level.difficulty_min) + " to " + str(level.difficulty_max) + " | "
+            string += "Gratitudes: " + str(level.num_gratitudes) + " | "
+            string += "Jump Types: " + ", ".join([ItemNames.jump_types[i] for i in level.jump_types]) + "\n"
+            string += "Segments: " + ", ".join(level.segment_list())
+
+        return string
+
+    def get_mapping(self):
+        mapping = {
+            # double jump levels
+            "touring_optimist" : self.touring_optimist.get_mapping(),
+            "bamboo_catching_water" : self.bamboo_catching_water.get_mapping(),
+            "screen_time" : self.screen_time.get_mapping(),
+
+            # flutter jump levels
+            "urban_sift" : self.urban_sift.get_mapping(),
+            "how_i_feel" : self.how_i_feel.get_mapping(),
+            "nanoseconds" : self.nanoseconds.get_mapping(),
+
+            # quad jump levels
+            "bluebottles" : self.bluebottles.get_mapping(),
+            "art_museum" : self.art_museum.get_mapping(),
+
+            # invert jump levels
+            "bird_bath" : self.bird_bath.get_mapping(),
+            "pheromones" : self.pheromones.get_mapping(),
+
+            # dip jump levels
+            "voices" : self.voices.get_mapping(),
+            "oil_slick" : self.oil_slick.get_mapping(),
+            "six_ft_pool_end" : self.six_ft_pool_end.get_mapping()
+        }
+
+        # hard levels
+        if self.world.options.include_five_stars:
+            mapping["butterfly_knife"] = self.butterfly_knife.get_mapping()
+            mapping["ozone"] = self.ozone.get_mapping()
+
+        return mapping
