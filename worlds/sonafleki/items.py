@@ -21,7 +21,11 @@ def create_and_classify_item(world : SonaflekiWorld, name : str):
     if item_id < grat_id:
         item_class = ItemClassification.progression
     elif item_id == grat_id:
-        item_class = ItemClassification.useful
+        if world.gratitudes_added < world.gratitudes_required:
+            item_class = ItemClassification.progression
+            world.gratitudes_added += 1
+        else:
+            item_class = ItemClassification.useful
     elif item_id == egg_id:
         item_class = ItemClassification.filler
     else:
@@ -34,7 +38,7 @@ def create_all_items(world : SonaflekiWorld):
     item_pool = []
 
     # add gratitudes
-    for i in range(world.options.total_gratitudes):
+    for i in range(world.existing_gratitudes):
         item_pool.append(world.create_item(ItemNames.gratitude))
 
     # add jump types
@@ -42,9 +46,6 @@ def create_all_items(world : SonaflekiWorld):
         if i != world.starting_jump:
             name = ItemNames.jump_types[i]
             item_pool.append(world.create_item(name))
-    if world.options.include_tidepool:
-        name = ItemNames.jump_types[-1]
-        item_pool.append(world.create_item(name))
 
     # add statues (depending on statue sanity level)
     statue_sanity = world.options.statue_sanity_level

@@ -1,4 +1,5 @@
-jump_types = [ "Double Jump", "Quad Jump", "Flutter Jump", "Dip Jump", "Invert Jump", "Dive Jump"]
+jump_types = [ "Double Jump", "Quad Jump", "Flutter Jump", "Dip Jump", "Invert Jump"]
+# NOTE: Dive jump is always located at tidepool, and thus never part of the item pool
 
 all_statues = "All Statues"
 all_teleporters = "All Teleporters"

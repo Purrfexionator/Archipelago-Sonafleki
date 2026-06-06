@@ -4,7 +4,7 @@ from Options import Choice, OptionGroup, PerGameCommonOptions, DeathLink, Range,
 
 class DeathLinkAmnesty(Range):
     """
-    How many deaths it takes to send a DeathLink
+    How many deaths it takes to send a DeathLink.
     """
     display_name = "Death Link Amnesty"
     range_start = 1
@@ -13,7 +13,8 @@ class DeathLinkAmnesty(Range):
 
 class TotalGratitudes(Range):
     """
-    Maximum number of how many Gratitudes can exist
+    Maximum number of how many Gratitudes can exist.
+    (NOTE: there may be fewer existing gratitudes if there aren't enough slots)
     """
     display_name = "Total Gratitudes"
     range_start = 0
@@ -22,12 +23,24 @@ class TotalGratitudes(Range):
 
 class GratitudesRequiredPercentage(Range):
     """
-    Percentage of existing Gratitudes you must receive to access your Goal Area
+    Percentage of existing Gratitudes you must receive to access your Goal Area.
     """
     display_name = "Gratitudes Required Percentage"
     range_start = 0
     range_end = 100
     default = 80
+
+class GratitudesRequiredPerHousePercentage(Range):
+    """
+    Percentage of existing Gratitudes you must receive to unlock each subsequent house.
+    (Ex: If 50 gratitudes exist and percentage is 10%,
+    House 2 will require 5 gratitudes, House 3 will require 10, House 4 will require 15,
+    and so on. House 1 is always free)
+    """
+    display_name = "Gratitudes Required Percentage"
+    range_start = 0
+    range_end = 25
+    default = 10
 
 class SkipTutorials(Toggle):
     """
@@ -264,6 +277,7 @@ class SonaflekiOptions(PerGameCommonOptions):
     #general options
     total_gratitudes: TotalGratitudes
     gratitudes_required: GratitudesRequiredPercentage
+    gratitudes_per_house: GratitudesRequiredPerHousePercentage
     skip_tutorials: SkipTutorials
     include_five_stars: IncludeFiveStars
     include_tidepool : IncludeTidepool
@@ -299,6 +313,7 @@ option_groups = [
     OptionGroup("General Options", [
         TotalGratitudes,
         GratitudesRequiredPercentage,
+        GratitudesRequiredPerHousePercentage,
         SkipTutorials,
         IncludeFiveStars,
         IncludeTidepool,
