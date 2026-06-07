@@ -1,5 +1,5 @@
 from __future__ import annotations
-from rule_builder.rules import Has, HasAll, HasAllCounts, HasFromList, Rule
+from rule_builder.rules import Has, HasAll, HasAllCounts
 from .Data import ItemNames, LocationNames
 
 from typing import TYPE_CHECKING
@@ -14,15 +14,16 @@ def set_all_rules(world: SonaflekiWorld):
 
     # set jump requirements for each level
     for level in active_levels:
-        entrance = world.get_entrance("to " + level.name)
-        jump_names = [ItemNames.jump_types[jump_type] for jump_type in level.jump_types]
-        base_jump = jump_names.pop(0)
+        # get rule for having necessary jump types
+        jump_map = {}
+        for jump in level.jump_types:
+            jump_map[ItemNames.jump_types[jump]] = 1
+        has_jumps = HasAllCounts(jump_map)
 
-        has_jumps = Has(base_jump)
-        for jump in jump_names:
-            has_jumps = has_jumps & Has(jump)
-
-        world.set_rule(entrance, has_jumps)
+        # for some reason the locations need their rules set individually
+        locations = world.get_region(level.name).get_locations()
+        for location in locations:
+            world.set_rule(location, has_jumps)
 
     #set house requirements
     requirement = 0
