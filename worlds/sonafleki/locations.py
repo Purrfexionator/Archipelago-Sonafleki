@@ -1,7 +1,7 @@
 from __future__ import annotations
 from BaseClasses import Region, Location
 from .Data import LocationNames
-from . import items, levels
+from . import items
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:

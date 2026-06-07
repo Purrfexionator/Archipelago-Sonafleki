@@ -1,11 +1,10 @@
 from typing import Mapping, Any, TextIO
-from unittest import case
 
 from worlds.AutoWorld import World
+
 from . import web_world, items, levels, locations, rules
 from . import options as sonafleki_options
 from .Data import ItemNames, LocationNames
-
 
 class SonaflekiWorld(World):
     """
