@@ -46,7 +46,7 @@ class SkipTutorials(Toggle):
     """
     Determines whether tutorial stages after obtaining jump types are skipped.
     """
-    display_name = "Include Tutorials"
+    display_name = "Skip Tutorials"
 
 class IncludeFiveStars(Toggle):
     """
@@ -191,6 +191,7 @@ class GratitudeDistribution(Choice):
     option_standard = 0
     option_even = 1
     option_randomized = 2
+    default = option_standard
 
 class RandomizeLevelLocations(Toggle):
     """
@@ -347,5 +348,99 @@ option_groups = [
     ])
 ]
 
-# TODO: option presets
-# - vanilla, standard, odd, chaotic
+option_presets = {
+    "Extra Vanilla": {
+        "total_gratitudes": 100,
+        "gratitudes_required_percentage": 100,
+        "gratitudes_per_house": 5,
+
+        "include_five_stars": True,
+        "include_tidepool": True,
+        "true_ending": True,
+
+        "jump_type_spawning": JumpTypeSpawning.option_consistent,
+        "tokens_per_house": 1,
+
+        "statue_sanity_level": StatueSanityLevel.option_none,
+        "teleport_sanity_level": TeleportSanityLevel.option_none,
+        "fetch_sanity_level": FetchSanityLevel.option_none
+    },
+    "Odd": {
+        "skip_tutorials": True,
+        "include_tidepool": True,
+
+        "jump_type_spawning": JumpTypeSpawning.option_semirandom,
+        "tokens_per_house": 4,
+        "extra_tokens_per_level": 1,
+
+        "fetch_sanity_level": FetchSanityLevel.option_insane,
+
+        "level_randomization": LevelRandomization.option_low,
+        "gratitude_distribution": GratitudeDistribution.option_randomized
+    },
+    "Unfamiliar": {
+        "include_five_stars": True,
+        "true_ending": True,
+
+        "jump_type_spawning": JumpTypeSpawning.option_hidden,
+
+        "level_randomization": LevelRandomization.option_medium,
+        "randomize_level_locations": True,
+        "randomize_music": True
+    },
+    "Chaotic": {
+        "include_five_stars": True,
+        "include_tidepool": True,
+        "true_ending": True,
+
+        "jump_type_spawning": JumpTypeSpawning.option_hidden,
+        "tokens_per_house": 5,
+
+        "level_randomization": LevelRandomization.option_high,
+        "max_variety_on_high": 3,
+        "gratitude_distribution": GratitudeDistribution.option_randomized,
+        "randomize_level_locations": True,
+        "randomize_music": True,
+
+        "trap_fill_percentage": 10
+    },
+    "True Insanity": {
+        "include_five_stars": True,
+        "include_tidepool": True,
+        "true_ending": True,
+
+        "jump_type_spawning": JumpTypeSpawning.option_hidden,
+
+        "statue_sanity_level": StatueSanityLevel.option_insane,
+        "teleport_sanity_level": TeleportSanityLevel.option_insane,
+        "fetch_sanity_level": FetchSanityLevel.option_insane,
+        "checkpoint_sanity": True,
+
+        "level_randomization": LevelRandomization.option_high,
+        "max_variety_on_high": 5,
+        "gratitude_distribution": GratitudeDistribution.option_randomized,
+        "randomize_level_locations": True,
+        "randomize_music": True,
+
+        "trap_fill_percentage": 60
+    },
+    "Abundance": {
+        "total_gratitudes": 100,
+        "gratitudes_required_percentage": 50,
+        "gratitudes_per_house": 5,
+
+        "include_five_stars": True,
+        "include_tidepool": True,
+
+        "jump_type_spawning": JumpTypeSpawning.option_everywhere,
+        "tokens_per_house": 10,
+        "extra_tokens_per_level": 5,
+
+        "statue_sanity_level": StatueSanityLevel.option_tame,
+        "checkpoint_sanity": True,
+
+        "level_randomization": LevelRandomization.option_high,
+        "randomize_level_locations": True,
+        "gratitude_distribution": GratitudeDistribution.option_even
+    }
+}
