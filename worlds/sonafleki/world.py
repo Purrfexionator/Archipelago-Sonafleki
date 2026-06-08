@@ -54,9 +54,9 @@ class SonaflekiWorld(World):
         if self.options.checkpoint_sanity:
             checkpoint_count = 0
 
-            included_levels = self.level_data.base_levels
+            included_levels = self.level_data.base_levels.copy()
             if self.options.include_five_stars:
-                included_levels += self.level_data.hard_levels
+                included_levels += self.level_data.hard_levels.copy()
 
             for level in included_levels:
                 checkpoint_count += level.num_checkpoints

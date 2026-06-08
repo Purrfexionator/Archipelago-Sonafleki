@@ -270,9 +270,9 @@ class SonaflekiLevels:
         self.world = world
 
     def randomize(self, amount : int):
-        all_levels = self.base_levels
+        all_levels = self.base_levels.copy()
         if self.world.options.include_five_stars:
-            all_levels += self.hard_levels
+            all_levels += self.hard_levels.copy()
 
         # per level randomization
         if amount == 1:
@@ -322,7 +322,7 @@ class SonaflekiLevels:
         if amount == 3:
             max_variety = self.world.options.max_variety_on_high
 
-            level_pool = all_levels
+            level_pool = all_levels.copy()
             shuffle_groups = []
 
             self.world.random.shuffle(level_pool)
@@ -377,9 +377,9 @@ class SonaflekiLevels:
                     level.jump_types.append(segment.jump_type)
 
     def get_level_string(self):
-        all_levels = self.base_levels
+        all_levels = self.base_levels.copy()
         if self.world.options.include_five_stars:
-            all_levels += self.hard_levels
+            all_levels += self.hard_levels.copy()
 
         string = ""
         for level in all_levels:

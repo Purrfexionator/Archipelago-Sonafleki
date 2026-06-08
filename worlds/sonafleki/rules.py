@@ -8,9 +8,9 @@ if TYPE_CHECKING:
 
 def set_all_rules(world: SonaflekiWorld):
     # get active levels
-    active_levels = world.level_data.base_levels
+    active_levels = world.level_data.base_levels.copy()
     if world.options.include_five_stars:
-        active_levels += world.level_data.hard_levels
+        active_levels += world.level_data.hard_levels.copy()
 
     # set jump requirements for each level
     for level in active_levels:

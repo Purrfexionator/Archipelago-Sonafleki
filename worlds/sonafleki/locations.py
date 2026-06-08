@@ -31,9 +31,9 @@ def create_and_connect_regions(world : SonaflekiWorld):
             regions.append(region)
 
     # retrieve level data
-    active_levels = world.level_data.base_levels
+    active_levels = world.level_data.base_levels.copy()
     if world.options.include_five_stars:
-        active_levels += world.level_data.hard_levels
+        active_levels += world.level_data.hard_levels.copy()
 
     # create level regions
     for level in active_levels:
@@ -103,9 +103,9 @@ def create_locations(world : SonaflekiWorld):
         region.add_locations(get_location_names_with_ids(world, tokens), SonaflekiLocation)
 
     # now that overworld is done, create gratitude and token locations for each level
-    active_levels = world.level_data.base_levels
+    active_levels = world.level_data.base_levels.copy()
     if world.options.include_five_stars:
-        active_levels += world.level_data.hard_levels
+        active_levels += world.level_data.hard_levels.copy()
 
     for level in active_levels:
         region = world.get_region(level.name)
