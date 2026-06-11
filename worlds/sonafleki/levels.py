@@ -119,7 +119,8 @@ class SonaflekiLevels:
         LevelSegment("hif6"),
         LevelSegment("hif7"),
         LevelSegment("hif8"),
-        LevelSegment("hif9")
+        LevelSegment("hif9"),
+        LevelSegment("hif10")
     ])
 
     nanoseconds = Level("Nanoseconds", 4, [1], [
@@ -136,14 +137,14 @@ class SonaflekiLevels:
 
     # quad jump levels
     bluebottles = Level("Bluebottles", 2, [2], [
-        LevelSegment("bb1"),
-        LevelSegment("bb2"),
-        LevelSegment("bb3"),
-        LevelSegment("bb4"),
-        LevelSegment("bb5"),
-        LevelSegment("bb6"),
-        LevelSegment("bb7"),
-        LevelSegment("bb8")
+        LevelSegment("bl1"),
+        LevelSegment("bl2"),
+        LevelSegment("bl3"),
+        LevelSegment("bl4"),
+        LevelSegment("bl5"),
+        LevelSegment("bl6"),
+        LevelSegment("bl7"),
+        LevelSegment("bl8")
     ])
 
     art_museum = Level("Art Museum", 2, [2], [
@@ -167,7 +168,8 @@ class SonaflekiLevels:
         LevelSegment("bk4"),
         LevelSegment("bk5"),
         LevelSegment("bk6"),
-        LevelSegment("bk7")
+        LevelSegment("bk7"),
+        LevelSegment("bk8")
     ])
 
     # invert jump
@@ -189,11 +191,9 @@ class SonaflekiLevels:
         LevelSegment("ph3"),
         LevelSegment("ph4"),
         LevelSegment("ph5"),
-        LevelSegment("ph6"),
+        LevelSegment("ph6", 2),
         LevelSegment("ph7"),
-        LevelSegment("ph8"),
-        LevelSegment("ph9"),
-        LevelSegment("ph10")
+        LevelSegment("ph8", 2),
     ])
 
     ozone = Level("Ozone", 5, [3], [
