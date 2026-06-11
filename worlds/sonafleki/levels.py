@@ -29,8 +29,7 @@ class Level:
 
     def __init__(self, name: str, difficulty : int, jump_types: list[int], segments: list[LevelSegment]):
         self.name = name
-        self.difficulty_min = difficulty
-        self.difficulty_max = difficulty
+        self.difficulty = difficulty
         self.num_gratitudes = difficulty + 1
         self.jump_types = jump_types
         self.segments = segments
@@ -50,10 +49,13 @@ class Level:
     def get_mapping(self):
         return {
             "name" : self.name,
-            "difficulty" : [self.difficulty_min, self.difficulty_max],
+            "difficulty" : self.difficulty,
             "gratitudes" : self.num_gratitudes,
+            "num_jump_types" : len(self.jump_types),
             "jump_types" : self.jump_types,
-            "segments" : self.segment_list()
+            "num_segments" : self.num_segments,
+            "segments" : self.segment_list(),
+            "num_checkpoints" : self.num_checkpoints
         }
 
 class SonaflekiLevels:
@@ -367,14 +369,42 @@ class SonaflekiLevels:
         for level in all_levels:
             level.jump_types = []
             level.num_checkpoints = 0
-            level.difficulty_min = level.segments[0].difficulty
-            level.difficulty_max = level.difficulty_min
+            level.difficulty = 0
             for segment in level.segments:
                 level.num_checkpoints += segment.num_checkpoints
-                level.difficulty_min = min(level.difficulty_min, segment.difficulty)
-                level.difficulty_max = max(level.difficulty_max, segment.difficulty)
+                level.difficulty += segment.difficulty
                 if segment.jump_type not in level.jump_types:
                     level.jump_types.append(segment.jump_type)
+            level.difficulty /= level.num_segments
+
+        # gratitude distribution
+        if self.world.options.gratitude_distribution != 0:
+            # get initial count of gratitudes to distribute
+            total_gratitudes = 0
+            for level in all_levels:
+                total_gratitudes += level.num_gratitudes
+
+            #even mode
+            if self.world.options.gratitude_distribution == 1:
+                i = 0
+                while total_gratitudes != 0:
+                    all_levels[i].num_gratitudes += 1
+                    i = (i + 1) % len(all_levels)
+
+            # random mode
+            if self.world.options.gratitude_distribution == 2:
+                # each level gets at 3 base gratitudes
+                for level in all_levels:
+                    level.num_gratitudes += 3
+                    total_gratitudes -= 3
+
+                # dish out remaining gratitudes, with a limit of 6
+                while total_gratitudes != 0:
+                    i = self.world.random.randint(0, len(all_levels) - 1)
+                    all_levels[i].num_gratitudes += 1
+                    total_gratitudes -= 1
+                    if all_levels[i].num_gratitudes >= 6:
+                        all_levels.pop(i)
 
     def get_level_string(self):
         all_levels = self.base_levels.copy()
