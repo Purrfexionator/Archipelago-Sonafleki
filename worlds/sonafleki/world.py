@@ -112,32 +112,31 @@ class SonaflekiWorld(World):
     def fill_slot_data(self) -> Mapping[str, Any]:
         return {
             "starting_jump" : self.starting_jump,
-            "randomize_levels" : 0 if self.options.level_randomization == 0 else 1,
+            "randomize_levels" : 0 if self.options.level_randomization.value == 0 else 1,
 
-            "total_gratitudes": self.exiting_gratitudes,
+            "total_gratitudes": self.existing_gratitudes,
             "required_gratitudes" : self.gratitudes_required,
             "gratitudes_per_house" : self.gratitudes_per_house,
 
-            "statue_sanity_level" : self.options.statue_sanity_level,
-            "teleport_sanity_level" : self.options.teleport_sanity_level,
-            "fetch_sanity_level" : self.options.fetch_sanity_level,
-            "checkpoint_sanity" : self.options.checkpoint_sanity,
+            "statue_sanity_level" : self.options.statue_sanity_level.value,
+            "teleport_sanity_level" : self.options.teleport_sanity_level.value,
+            "fetch_sanity_level" : self.options.fetch_sanity_level.value,
+            "checkpoint_sanity" : self.options.checkpoint_sanity.value,
 
-            "tokens_per_level" : self.options.extra_tokens_per_level,
-            "tokens_per_house" : self.options.tokens_per_house,
+            "tokens_per_level" : self.options.extra_tokens_per_level.value,
+            "tokens_per_house" : self.options.tokens_per_house.value,
 
-            "include_five_stars" : self.options.include_five_stars,
-            "include_tidepool" : self.options.include_tidepool,
-            "true_ending" : self.options.true_ending,
-            "skip_tutorials" : self.options.skip_tutorials,
+            "include_five_stars" : self.options.include_five_stars.value,
+            "include_tidepool" : self.options.include_tidepool.value,
+            "true_ending" : self.options.true_ending.value,
+            "skip_tutorials" : self.options.skip_tutorials.value,
 
-            "randomize_level_pos" : self.options.randomize_level_locations,
-            "randomize_music" : self.options.randomize_music,
-            "jump_type_spawning" : self.options.jump_type_spawning,
-            "rand_seed" : self.get_seed(),
+            "randomize_level_pos" : self.options.randomize_level_locations.value,
+            "randomize_music" : self.options.randomize_music.value,
+            "jump_type_spawning" : self.options.jump_type_spawning.value,
 
-            "death_link" : self.options.death_link,
-            "death_link_amnesty" : self.options.death_link_amnesty,
+            "death_link" : self.options.death_link.value,
+            "death_link_amnesty" : self.options.death_link_amnesty.value,
 
             "level_data": self.level_data.get_mapping()
         }

@@ -415,7 +415,7 @@ class SonaflekiLevels:
         for level in all_levels:
             string += "\n\n" + level.name + "\n"
             string += "Checkpoints: " + str(level.num_checkpoints) + " | "
-            string += "Difficulty: " + str(level.difficulty_min) + " to " + str(level.difficulty_max) + " | "
+            string += "Difficulty: " + str(round(level.difficulty*10)/10) + " | "
             string += "Gratitudes: " + str(level.num_gratitudes) + " | "
             string += "Jump Types: " + ", ".join([ItemNames.jump_types[i] for i in level.jump_types]) + "\n"
             string += "Segments: " + ", ".join(level.segment_list())
