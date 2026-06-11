@@ -20,10 +20,9 @@ def set_all_rules(world: SonaflekiWorld):
             jump_map[ItemNames.jump_types[jump]] = 1
         has_jumps = HasAllCounts(jump_map)
 
-        # for some reason the locations need their rules set individually
-        locations = world.get_region(level.name).get_locations()
-        for location in locations:
-            world.set_rule(location, has_jumps)
+        entrance_name = "to " + level.name
+        entrance = world.get_entrance(entrance_name)
+        world.set_rule(entrance, has_jumps)
 
     #set house requirements
     requirement = 0
