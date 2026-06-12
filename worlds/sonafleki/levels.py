@@ -132,7 +132,8 @@ class SonaflekiLevels:
         LevelSegment("ns6"),
         LevelSegment("ns7"),
         LevelSegment("ns8"),
-        LevelSegment("ns9")
+        LevelSegment("ns9"),
+        LevelSegment("ns10")
     ])
 
     # quad jump levels
