@@ -29,6 +29,9 @@ class SonaflekiWorld(World):
     gratitudes_per_house : int
     gratitudes_added = 0
 
+    num_location_checks : int
+    num_key_items : int
+
     def generate_early(self) -> None:
         # get level data and pick starting jump
         self.level_data = levels.SonaflekiLevels(self)
@@ -87,6 +90,10 @@ class SonaflekiWorld(World):
             case 1: item_count += 1
             case 2: item_count += 4
 
+        # update for tracking purposes
+        self.num_location_checks = slots
+        self.num_key_items = item_count
+
         # determine available slots, resolve flicky count
         available_slots = slots - item_count
         self.existing_gratitudes = min(self.options.total_gratitudes.value, available_slots)
@@ -137,6 +144,10 @@ class SonaflekiWorld(World):
 
             "death_link" : self.options.death_link.value,
             "death_link_amnesty" : self.options.death_link_amnesty.value,
+
+            "location_map_size": len(self.location_name_to_id),
+            "num_location_checks": self.num_location_checks,
+            "num_key_items": self.num_key_items,
 
             "level_data": self.level_data.get_mapping()
         }
