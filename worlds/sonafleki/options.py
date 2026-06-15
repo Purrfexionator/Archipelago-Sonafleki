@@ -37,7 +37,7 @@ class GratitudesRequiredPerHousePercentage(Range):
     House 2 will require 5 gratitudes, House 3 will require 10, House 4 will require 15,
     and so on. House 1 is always free)
     """
-    display_name = "Gratitudes Required Percentage"
+    display_name = "Gratitudes Required Per House Percentage"
     range_start = 0
     range_end = 25
     default = 10

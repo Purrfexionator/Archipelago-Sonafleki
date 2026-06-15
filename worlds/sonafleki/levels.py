@@ -384,6 +384,7 @@ class SonaflekiLevels:
             total_gratitudes = 0
             for level in all_levels:
                 total_gratitudes += level.num_gratitudes
+                level.num_gratitudes = 0
 
             #even mode
             if self.world.options.gratitude_distribution == 1:
