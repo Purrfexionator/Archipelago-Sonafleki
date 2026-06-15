@@ -83,7 +83,7 @@ class SonaflekiWorld(World):
         # teleporters
         match self.options.teleport_sanity_level:
             case 1: item_count += 1
-            case 2: item_count += 5
+            case 2: item_count += 4
 
         # fetch items
         match self.options.fetch_sanity_level:

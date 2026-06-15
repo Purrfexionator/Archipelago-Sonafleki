@@ -37,7 +37,7 @@ statue_prefixes = ["Frog Statue ", "Eagle Statue ", "Cat Statue ", "Arch Statue 
 statue_suffixes = ["A", "B", "C", "D"]
 
 teleporter_prefix = "Teleporter "
-teleporter_suffixes = ["A", "B", "C", "D", "E"]
+teleporter_suffixes = ["A", "B", "C", "D"]
 
 fetch_items = ["Rose", "Basket", "Controller", "Rake", "Pickaxe"]
 
