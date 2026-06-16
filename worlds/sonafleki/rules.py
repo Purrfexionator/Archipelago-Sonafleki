@@ -24,6 +24,12 @@ def set_all_rules(world: SonaflekiWorld):
         entrance = world.get_entrance(entrance_name)
         world.set_rule(entrance, has_jumps)
 
+    # set tutorial jump requirements
+    for i in range(5):
+        entrance_name = "to " + LocationNames.tutorials[i]
+        entrance = world.get_entrance(entrance_name)
+        world.set_rule(entrance, Has(ItemNames.jump_types[i]))
+
     #set house requirements
     requirement = 0
     for house in LocationNames.houses:

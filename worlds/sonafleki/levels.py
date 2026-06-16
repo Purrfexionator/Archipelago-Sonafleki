@@ -46,6 +46,14 @@ class Level:
             final_list.append(segment.name)
         return final_list
 
+    def checkpoint_start_list(self):
+        final_list = []
+        total = 0
+        for segment in self.segments:
+            final_list.append(total)
+            total += segment.num_checkpoints
+        return final_list
+
     def get_mapping(self):
         return {
             "name" : self.name,
@@ -55,7 +63,8 @@ class Level:
             "jump_types" : self.jump_types,
             "num_segments" : self.num_segments,
             "segments" : self.segment_list(),
-            "num_checkpoints" : self.num_checkpoints
+            "num_checkpoints" : self.num_checkpoints,
+            "checkpoint_starts" : self.checkpoint_start_list()
         }
 
 class SonaflekiLevels:

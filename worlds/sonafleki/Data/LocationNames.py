@@ -32,6 +32,7 @@ tutorials = [
     "Dip Jump Tutorial",
     "Dive Jump Tutorial"
 ]
+tutorial_checkpoint_counts = [5, 4, 4, 4, 4, 4]
 
 statue_prefixes = ["Frog Statue ", "Eagle Statue ", "Cat Statue ", "Arch Statue "]
 statue_suffixes = ["A", "B", "C", "D"]
@@ -81,6 +82,18 @@ def get_mapping():
             name = house + token_prefix + suffix
             mapping[name] = index
             index += 1
+
+    for i in range(6):
+        name = tutorials[i] + single_gratitude_suffix
+        mapping[name] = index
+        index += 1
+        for j in range(tutorial_checkpoint_counts[i]):
+            name = tutorials[i] + checkpoint_prefix + str(j + 1)
+            mapping[name] = index
+            index += 1
+        for suffix in level_token_suffixes:
+            name = tutorials[i] + token_prefix + suffix
+            mapping[name] = index
 
     for tutorial in tutorials:
         name = tutorial + single_gratitude_suffix

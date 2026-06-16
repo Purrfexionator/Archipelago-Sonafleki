@@ -102,7 +102,30 @@ def create_locations(world : SonaflekiWorld):
             tokens.append(token)
         region.add_locations(get_location_names_with_ids(world, tokens), SonaflekiLocation)
 
-    # now that overworld is done, create gratitude and token locations for each level
+    # if necessary, create gratitude and token locations for tutorials
+    if not world.options.skip_tutorials:
+        num_tutorials = 6 if world.options.include_tidepool else 5
+        for i in range(num_tutorials):
+            region = world.get_region(LocationNames.tutorials[i])
+            rewards = []
+
+            gratitude = LocationNames.tutorials[i] + LocationNames.single_gratitude_suffix
+            rewards.append(gratitude)
+
+            token_count = world.options.extra_tokens_per_level.value
+            if token_count > 0:
+                for j in range(token_count):
+                    token = LocationNames.tutorials[i] + LocationNames.token_prefix + LocationNames.level_token_suffixes[j]
+                    rewards.append(token)
+
+            if world.options.checkpoint_sanity:
+                for j in range(LocationNames.tutorial_checkpoint_counts[i]):
+                    checkpoint = LocationNames.tutorials[i] + LocationNames.checkpoint_prefix + LocationNames.checkpoint_suffixes[j]
+                    rewards.append(checkpoint)
+
+            region.add_locations(get_location_names_with_ids(world, rewards), SonaflekiLocation)
+
+    # next, create gratitude and token locations for each level
     active_levels = world.level_data.base_levels.copy()
     if world.options.include_five_stars:
         active_levels += world.level_data.hard_levels.copy()
@@ -116,7 +139,7 @@ def create_locations(world : SonaflekiWorld):
             rewards.append(gratitude)
 
         token_count = world.options.extra_tokens_per_level.value
-        if (token_count > 0):
+        if token_count > 0:
             for i in range(token_count):
                 token = level.name + LocationNames.token_prefix + LocationNames.level_token_suffixes[i]
                 rewards.append(token)
