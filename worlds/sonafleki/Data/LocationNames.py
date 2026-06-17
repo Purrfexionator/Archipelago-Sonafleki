@@ -96,11 +96,6 @@ def get_mapping():
             mapping[name] = index
             index += 1
 
-    for tutorial in tutorials:
-        name = tutorial + single_gratitude_suffix
-        mapping[name] = index
-        index += 1
-
     for statue_prefix in statue_prefixes:
         for statue_suffix in statue_suffixes:
             name = statue_prefix + statue_suffix + single_gratitude_suffix
