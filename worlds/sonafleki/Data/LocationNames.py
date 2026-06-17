@@ -94,6 +94,7 @@ def get_mapping():
         for suffix in level_token_suffixes:
             name = tutorials[i] + token_prefix + suffix
             mapping[name] = index
+            index += 1
 
     for tutorial in tutorials:
         name = tutorial + single_gratitude_suffix
