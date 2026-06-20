@@ -1,5 +1,8 @@
 from __future__ import annotations
+
+from BaseClasses import ItemClassification
 from rule_builder.rules import Has, HasAll, HasAllCounts
+from worlds.generic.Rules import add_item_rule
 from .Data import ItemNames, LocationNames
 
 from typing import TYPE_CHECKING
@@ -43,8 +46,13 @@ def set_all_rules(world: SonaflekiWorld):
     jump_types = ItemNames.jump_types
     has_jumps = HasAll(jump_types[0], jump_types[1], jump_types[2], jump_types[3], jump_types[4])
     has_gratitudes = HasAllCounts({ItemNames.gratitude : world.gratitudes_required})
-    ascension = world.get_entrance("to Ascension")
-    world.set_rule(ascension, has_jumps & has_gratitudes)
+    awakening = world.get_entrance("to Awakening")
+    world.set_rule(awakening, has_jumps & has_gratitudes)
+
+    # forbid important item placement in awakening
+    awakening_region = world.get_region("Awakening")
+    for location in awakening_region.locations:
+        add_item_rule(location, lambda item : item.classification != ItemClassification.progression)
 
     # set statue rules based on statue sanity level
     for i in range(4):
@@ -84,4 +92,4 @@ def set_all_rules(world: SonaflekiWorld):
                     world.set_rule(gratitude, Has(fetch_item))
 
     # set victory condition
-    world.set_completion_rule(Has("Victory"))
+    world.set_completion_rule(Has("Awakening"))

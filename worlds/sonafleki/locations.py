@@ -15,8 +15,8 @@ def create_and_connect_regions(world : SonaflekiWorld):
 
     # overworld and ascension are always guaranteed to be present
     overworld = Region("Overworld", world.player, world.multiworld)
-    ascension = Region("Ascension", world.player, world.multiworld)
-    regions += [overworld, ascension]
+    awakening = Region("Awakening", world.player, world.multiworld)
+    regions += [overworld, awakening]
 
     # add house regions
     for house in LocationNames.houses:
@@ -45,8 +45,8 @@ def create_and_connect_regions(world : SonaflekiWorld):
 
     # create connections
     overworld_region = world.get_region("Overworld")
-    ascension_region = world.get_region("Ascension")
-    overworld_region.connect(ascension_region, "to Ascension")
+    awakening_region = world.get_region("Awakening")
+    overworld_region.connect(awakening_region, "to Awakening")
     for house in LocationNames.houses:
         region = world.get_region(house)
         overworld_region.connect(region, "to " + house)
@@ -125,7 +125,7 @@ def create_locations(world : SonaflekiWorld):
 
             region.add_locations(get_location_names_with_ids(world, rewards), SonaflekiLocation)
 
-    # next, create gratitude and token locations for each level
+    # next, create gratitude, token, and checkpoint locations for each level
     active_levels = world.level_data.base_levels.copy()
     if world.options.include_five_stars:
         active_levels += world.level_data.hard_levels.copy()
@@ -152,5 +152,14 @@ def create_locations(world : SonaflekiWorld):
         region.add_locations(get_location_names_with_ids(world, rewards), SonaflekiLocation)
 
     # final step: add victory event
-    ascension = world.get_region("Ascension")
-    ascension.add_event("Game Completed", "Victory", location_type = SonaflekiLocation, item_type = items.SonaflekiItem)
+    awakening = world.get_region("Awakening")
+    if world.options.checkpoint_sanity:
+        checkpoints = []
+        num_checkpoints = 7 if world.options.true_ending else 3
+        for i in range(num_checkpoints):
+            checkpoint = LocationNames.awakening_checkpoint_prefix + LocationNames.awakening_checkpoint_suffixes[i]
+            checkpoints.append(checkpoint)
+        awakening.add_locations(get_location_names_with_ids(world, checkpoints), SonaflekiLocation)
+
+    # final step: add victory event
+    awakening.add_event("Parity", "Awakening", location_type = SonaflekiLocation, item_type = items.SonaflekiItem)

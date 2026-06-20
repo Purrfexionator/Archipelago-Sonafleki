@@ -58,6 +58,8 @@ checkpoint_prefix = " - Checkpoint "
 checkpoint_suffixes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
                        "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
 
+awakening_checkpoint_prefix = "Parity - Checkpoint "
+awakening_checkpoint_suffixes = ["1", "2", "3", "4", "5", "6", "7"]
 
 def get_mapping():
     mapping = {}
@@ -115,6 +117,11 @@ def get_mapping():
 
     for suffix in overworld_gratitude_suffixes:
         name = overworld_gratitude_prefix + suffix
+        mapping[name] = index
+        index += 1
+
+    for suffix in awakening_checkpoint_suffixes:
+        name = awakening_checkpoint_prefix + suffix
         mapping[name] = index
         index += 1
 

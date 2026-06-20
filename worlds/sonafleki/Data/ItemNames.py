@@ -1,9 +1,9 @@
 jump_types = ["Double Jump", "Flutter Jump", "Quad Jump", "Invert Jump", "Dip Jump"]
 # NOTE: Dive jump is always located at tidepool, and thus never part of the item pool
 
-all_statues = "All Statues"
-all_teleporters = "All Teleporters"
-all_fetch_items = "All Fetch Items"
+all_statues = "Statues"
+all_teleporters = "Teleporters"
+all_fetch_items = "Fetch Items"
 
 statue_types = ["Frog Statues", "Eagle Statues", "Cat Statues", "Arch Statues"]
 statue_prefixes = ["Frog Statue ", "Eagle Statue ", "Cat Statue ", "Arch Statue "]

@@ -42,7 +42,11 @@ class SonaflekiWorld(World):
 
         # count slots based on settings
         slots = 100 # base game gratitude slots
-        
+
+        # subtract tutorial gratitude slots if not included
+        if self.options.skip_tutorials: slots -= 6
+        elif not self.options.include_tidepool: slots -= 1
+
         # subtract hard gratitude slots if not included
         if not self.options.include_five_stars:
             for level in self.level_data.hard_levels:
@@ -50,15 +54,14 @@ class SonaflekiWorld(World):
 
         # token slots
         token_count = 5 * self.options.tokens_per_house.value
-        level_count = 15 if self.options.include_five_stars else 13
+        level_count = 13
+        if self.options.include_five_stars: level_count += 2
+        if not self.options.skip_tutorials:
+            level_count += 6 if self.options.include_tidepool else 5
         token_count += level_count * self.options.extra_tokens_per_level.value
         slots += token_count
 
-        # tutorial slots
-        if not self.options.skip_tutorials:
-            slots += 6 if self.options.include_tidepool else 5
-
-        # checkpoint slots
+        # level checkpoint slots
         if self.options.checkpoint_sanity:
             checkpoint_count = 0
 
@@ -69,10 +72,16 @@ class SonaflekiWorld(World):
             for level in included_levels:
                 checkpoint_count += level.num_checkpoints
 
+            if not self.options.skip_tutorials:
+                tutorial_count = 6 if self.options.include_tidepool else 5
+                for i in range(tutorial_count): checkpoint_count += LocationNames.tutorial_checkpoint_counts[i]
+
+            checkpoint_count += 7 if self.options.true_ending else 3
+
             slots += checkpoint_count
 
         # count items based on settings
-        item_count = 5 # base jump types
+        item_count = 4 # base jump types
 
         #statues
         match self.options.statue_sanity_level:
